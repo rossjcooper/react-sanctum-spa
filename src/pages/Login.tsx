@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import * as yup from "yup";
 import { Field, Formik, Form } from "formik";
 import Error from "../components/Error";
@@ -23,6 +23,8 @@ const initialValues: FormValues = {
 const Login = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string|undefined>();
+	const [apiErrors, setApiErrors] = useState({});
+	const passwordRef = useRef<HTMLInputElement>()
 
 	const onSubmit = (values: FormValues) => {
 		setLoading(true);
@@ -31,8 +33,10 @@ const Login = () => {
 			console.log(res.data);
 		}).catch(err => {
 			setLoading(false);
-			if (err.response && err.response.status === 401) {
-				setError('Invalid login, try again');
+			if (err.response && err.response.status === 422) {
+				setApiErrors(err.response.data.errors);
+				passwordRef.current?.focus();
+				passwordRef.current?.select();
 				return;
 			}
 			console.error(err);
@@ -47,22 +51,24 @@ const Login = () => {
 					<img src={logo} alt="Logo" className="w-32 inline" />
 				</div>
 				<Formik validationSchema={rules} initialValues={initialValues} onSubmit={onSubmit}>
-					{({errors, isValid, touched}) => (
+					{({errors, isValid, touched}) => {
+						const allErrors = {...errors, ...apiErrors};
+						return (
 						<Form>
 							<div className="mb-2">
 								<Field name="email" className="input-control block w-full" placeholder="you@example.com"/>
-								<Error error={errors.email} />
+								<Error error={allErrors.email} />
 							</div>
 							<div className="mb-2">
-								<Field name="password" type="password" className="input-control block w-full" placeholder="********"/>
-								<Error error={errors.password} />
+								<Field name="password" type="password" className="input-control block w-full" placeholder="********" innerRef={passwordRef}/>
+								<Error error={allErrors.password} />
 							</div>
 							<Error error={error} />
 							<div>
 								<button disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Login'}</button>
 							</div>
 						</Form>
-					)}
+					)}}
 				</Formik>
 			</div>
 		</div>
