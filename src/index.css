@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.input-control {
+	@apply rounded-sm p-4 border border-gray-300 bg-white;
+}
+
+.button {
+	@apply p-4 rounded font-semibold disabled:bg-gray-400 disabled:text-slate-600;
+}
+
+.button-primary {
+	@apply bg-violet-600 text-white;
+}
+
+.text-primary {
+	@apply text-violet-600;
+}
+
+.bg-primary {
+	@apply bg-violet-600;
+}

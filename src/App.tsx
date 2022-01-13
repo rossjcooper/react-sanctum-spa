@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {ReactNode, useEffect, useState } from 'react';
 import './App.css';
+import { fetchCsrfCookie } from "./services/auth";
+import AuthContext, { AuthState } from "./contexts/AuthContext";
+interface AppProps {
+    children?: ReactNode,
+}
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props: AppProps) {
+    const [authState, setAuthState] = useState<AuthState>({
+        setUser: (user) => {setAuthState({...authState, user})}
+    });
+
+    useEffect(() => {
+        fetchCsrfCookie().then();
+    }, []);
+    return (
+        <div className="App">
+            <AuthContext.Provider value={authState}>
+                {props.children}
+            </AuthContext.Provider>
+        </div>
+    );
 }
 
 export default App;

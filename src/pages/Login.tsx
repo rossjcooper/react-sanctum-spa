@@ -1,10 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
+import * as yup from "yup";
+import { Field, Formik, Form } from "formik";
+import Error from "../components/Error";
+import logo from "../img/logo.png";
+import { attemptLogin } from "../services/auth";
+
+const rules = yup.object({
+	email: yup.string().label('Email').email().required(),
+	password: yup.string().label('Password').min(8).required(),
+});
+
+interface FormValues {
+	email: string,
+	password: string,
+}
+
+const initialValues: FormValues = {
+	email: '',
+	password: '',
+};
 
 const Login = () => {
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState<string|undefined>();
+
+	const onSubmit = (values: FormValues) => {
+		setLoading(true);
+		setError(undefined);
+		attemptLogin(values.email, values.password).then(res => {
+			console.log(res.data);
+		}).catch(err => {
+			setLoading(false);
+			if (err.response && err.response.status === 401) {
+				setError('Invalid login, try again');
+				return;
+			}
+			console.error(err);
+			setError('Something went wrong, please try again');
+		})
+	}
+
 	return (
-		<div className="flex items-center w-screen h-screen justify-items-center">
-			<div className="shadow m-auto max-w-full w-96">
-				<h1 className="text-xl p-4 text-center font-semibold">Login</h1>
+		<div className="flex items-center w-screen h-screen justify-items-center bg-gray-100">
+			<div className="shadow m-auto max-w-full w-96 p-4 bg-white">
+				<div className="w-full text-center p-4">
+					<img src={logo} alt="Logo" className="w-32 inline" />
+				</div>
+				<Formik validationSchema={rules} initialValues={initialValues} onSubmit={onSubmit}>
+					{({errors, isValid, touched}) => (
+						<Form>
+							<div className="mb-2">
+								<Field name="email" className="input-control block w-full" placeholder="you@example.com"/>
+								<Error error={errors.email} />
+							</div>
+							<div className="mb-2">
+								<Field name="password" type="password" className="input-control block w-full" placeholder="********"/>
+								<Error error={errors.password} />
+							</div>
+							<Error error={error} />
+							<div>
+								<button disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Login'}</button>
+							</div>
+						</Form>
+					)}
+				</Formik>
 			</div>
 		</div>
 	);
