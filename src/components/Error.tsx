@@ -17,7 +17,7 @@ const Error = (props: ErrorProps) => {
 	}
 
 	return (
-		<span className="text-red-500 block p-2">{error}</span>
+		<span className="text-red-500 block px-1 py-2 font-light text-xs">{error}</span>
 	);
 }
 

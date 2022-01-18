@@ -11,6 +11,12 @@ export interface AuthUser {
 	email: string,
 }
 
+export interface ChangePasswordData {
+	currentPassword: string,
+	newPassword: string,
+	confirmPassword: string,
+}
+
 interface LoginResponse {
 	user: AuthUser,
 }
@@ -29,4 +35,8 @@ export const fetchProfile = () => {
 
 export const updateProfile = (user: AuthUser) => {
 	return API.post<LoginResponse>('/profile', user);
+}
+
+export const changePassword = (data: ChangePasswordData) => {
+	return API.post('/changePassword', data);
 }

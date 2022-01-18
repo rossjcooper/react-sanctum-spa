@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .input-control {
-	@apply rounded-sm p-4 border-b-2 border-gray-200 bg-white;
+	@apply rounded-sm p-2 border-b-2 border-gray-200 bg-white;
 }
 
 .form-label {
-	@apply mb-2 text-gray-700 text-sm;
+	@apply mb-1 text-gray-700 text-sm font-light;
 }
 
 .button {
