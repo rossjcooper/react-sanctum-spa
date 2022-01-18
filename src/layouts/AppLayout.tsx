@@ -16,7 +16,7 @@ export const AppLayout = (props: AppLayoutProps) => {
 				<Sidebar />
 			</aside>
 			<div className="flex flex-col flex-1">
-				<header className="flex-0 bg-white shadow-sm p-4 h-16 flex items-center">
+				<header className="flex-0 bg-white shadow z-10 p-4 h-16 flex items-center">
 					<div className="flex-1 mr-auto text-left">
 						{props.header}
 					</div>
@@ -24,7 +24,7 @@ export const AppLayout = (props: AppLayoutProps) => {
 						<ProfileButton />
 					</div>
 				</header>
-				<main className="flex-1 overflow-auto">{props.children}</main>
+				<main className="flex-1 overflow-auto text-left p-4">{props.children}</main>
 			</div>
 		</div>
 	);

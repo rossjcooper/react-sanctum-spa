@@ -26,3 +26,7 @@ export const attemptLogout = () => {
 export const fetchProfile = () => {
 	return API.get<LoginResponse>('/profile');
 }
+
+export const updateProfile = (user: AuthUser) => {
+	return API.post<LoginResponse>('/profile', user);
+}

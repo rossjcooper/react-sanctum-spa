@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthGuarded from "./components/AuthGuarded";
@@ -16,6 +17,7 @@ ReactDOM.render(
 				<Routes>
 					<Route path="/" element={<AuthGuarded><Dashboard /></AuthGuarded>} />
 					<Route path="/login" element={<Unguarded><Login /></Unguarded>} />
+					<Route path="/profile" element={<AuthGuarded><Profile /></AuthGuarded>} />
 				</Routes>
 			</BrowserRouter>
 		</App>

@@ -60,12 +60,12 @@ const Login = () => {
 					{({errors, isValid, touched}) => {
 						const allErrors = {...errors, ...apiErrors};
 						return (
-						<Form>
-							<div className="mb-2">
+						<Form className="text-left">
+							<div className="mb-4">
 								<Field name="email" className="input-control block w-full" placeholder="you@example.com"/>
 								<Error error={allErrors.email} />
 							</div>
-							<div className="mb-2">
+							<div className="mb-4">
 								<Field name="password" type="password" className="input-control block w-full" placeholder="********" innerRef={passwordRef}/>
 								<Error error={allErrors.password} />
 							</div>
