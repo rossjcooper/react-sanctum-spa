@@ -11,13 +11,5 @@
 }
 
 .button-primary {
-	@apply bg-violet-600 text-white;
-}
-
-.text-primary {
-	@apply text-violet-600;
-}
-
-.bg-primary {
-	@apply bg-violet-600;
+	@apply bg-primary text-white;
 }
