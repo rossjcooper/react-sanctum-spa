@@ -3,7 +3,7 @@ import { AuthUser } from "../services/auth";
 
 export interface AuthState {
 	user?: AuthUser,
-	setUser: (user: AuthUser) => any,
+	setUser: (user: AuthUser|undefined) => any,
 }
 const initialState: AuthState = {user: undefined, setUser: (user) => {}};
 

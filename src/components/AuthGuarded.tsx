@@ -15,7 +15,7 @@ export const AuthGuarded = (props: AuthGuardedProps) => {
 		if (!user) {
 			navigate('/login');
 		}
-	}, []);
+	}, [user]);
 
 	if (!user) {
 		return null;

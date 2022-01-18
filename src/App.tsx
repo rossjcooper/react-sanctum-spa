@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import './App.css';
 import { AuthUser, fetchCsrfCookie, fetchProfile } from "./services/auth";
-import AuthContext, { AuthState } from "./contexts/AuthContext";
+import AuthContext from "./contexts/AuthContext";
 interface AppProps {
     children?: ReactNode,
 }
