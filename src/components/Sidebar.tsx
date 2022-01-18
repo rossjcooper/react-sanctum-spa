@@ -11,7 +11,7 @@ interface SideBarLinkProps {
 const SideBarLink = (props: SideBarLinkProps) => {
 	return (
 		<div className="p-2 text-left">
-			<NavLink to={props.to} className={({ isActive }) => 'p-2 w-full block rounded text-left ' + (isActive ? 'bg-primary' : '')}>{props.children}</NavLink>
+			<NavLink to={props.to} className={({ isActive }) => 'p-2 w-full block rounded text-left text-white ' + (isActive ? 'bg-primary' : 'hover:text-secondary')}>{props.children}</NavLink>
 		</div>
 	);
 }
