@@ -5,10 +5,20 @@ export const fetchCsrfCookie = () => {
 	return API.get('/sanctum/csrf-cookie');
 }
 
-interface LoginResponse {
-	token: string,
+export interface AuthUser {
+	id: number,
+	name: string,
+	email: string,
 }
 
-export const attemptLogin = (email: string, password: string): AxiosPromise<AxiosResponse<LoginResponse>> => {
-	return API.post('/login', {email, password});
+interface LoginResponse {
+	user: AuthUser,
+}
+
+export const attemptLogin = (email: string, password: string) => {
+	return API.post<LoginResponse>('/login', {email, password});
+}
+
+export const fetchProfile = () => {
+	return API.get<LoginResponse>('/profile');
 }

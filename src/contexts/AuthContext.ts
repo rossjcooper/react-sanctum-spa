@@ -1,15 +1,12 @@
-import { createContext, PropsWithChildren, ReactNode } from "react";
-
-interface AuthUser {
-
-}
+import { createContext } from "react";
+import { AuthUser } from "../services/auth";
 
 export interface AuthState {
 	user?: AuthUser,
-	setUser?: (user: AuthUser) => any,
+	setUser: (user: AuthUser) => any,
 }
-const initialState: AuthState = {};
+const initialState: AuthState = {user: undefined, setUser: (user) => {}};
 
-const AuthContext = createContext(initialState);
+export const AuthContext = createContext(initialState);
 
 export default AuthContext;

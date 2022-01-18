@@ -3,15 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Login from './pages/Login';
+import Home from './pages/Home';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthGuarded from "./components/AuthGuarded";
+import Unguarded from "./components/Unguarded";
 
 ReactDOM.render(
 	<React.StrictMode>
 		<App>
 			<BrowserRouter>
 				<Routes>
-					<Route path="/login" element={<Login />} />
+					<Route path="/" element={<AuthGuarded><Home /></AuthGuarded>} />
+					<Route path="/login" element={<Unguarded><Login /></Unguarded>} />
 				</Routes>
 			</BrowserRouter>
 		</App>

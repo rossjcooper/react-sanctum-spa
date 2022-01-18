@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import * as yup from "yup";
 import { Field, Formik, Form } from "formik";
 import Error from "../components/Error";
 import logo from "../img/logo.png";
 import { attemptLogin } from "../services/auth";
+import AuthContext from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const rules = yup.object({
 	email: yup.string().label('Email').email().required(),
@@ -25,12 +27,16 @@ const Login = () => {
 	const [error, setError] = useState<string|undefined>();
 	const [apiErrors, setApiErrors] = useState({});
 	const passwordRef = useRef<HTMLInputElement>()
+	const { setUser } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	const onSubmit = (values: FormValues) => {
 		setLoading(true);
 		setError(undefined);
+		setApiErrors({});
 		attemptLogin(values.email, values.password).then(res => {
-			console.log(res.data);
+			setUser(res.data.user);
+			navigate('/');
 		}).catch(err => {
 			setLoading(false);
 			if (err.response && err.response.status === 422) {
