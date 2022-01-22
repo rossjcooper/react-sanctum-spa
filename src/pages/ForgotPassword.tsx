@@ -65,7 +65,7 @@ const ForgotPassword = () => {
 							return (
 								<Form className="text-left">
 									<div className="mb-4">
-										<Field name="email" className="input-control block w-full" placeholder="you@example.com" />
+										<Field name="email" className="input-control block w-full" placeholder="you@example.com" ariaLabel="Email"/>
 										<Error error={allErrors.email} />
 									</div>
 									<Error error={error} />
