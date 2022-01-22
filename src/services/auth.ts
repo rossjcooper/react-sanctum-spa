@@ -40,3 +40,11 @@ export const updateProfile = (user: AuthUser) => {
 export const changePassword = (data: ChangePasswordData) => {
 	return API.post('/changePassword', data);
 }
+
+export const forgotPassword = (email: string) => {
+	return API.post('/forgotPassword', {email});
+}
+
+export const resetPassword = (email: string, password: string, confirmPassword: string, token: string) => {
+	return API.post('/resetPassword', {email, password, confirmPassword, token});
+}

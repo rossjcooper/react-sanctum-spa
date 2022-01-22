@@ -9,6 +9,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthGuarded from "./components/AuthGuarded";
 import Unguarded from "./components/Unguarded";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -17,6 +19,8 @@ ReactDOM.render(
 				<Routes>
 					<Route path="/" element={<AuthGuarded><Dashboard /></AuthGuarded>} />
 					<Route path="/login" element={<Unguarded><Login /></Unguarded>} />
+					<Route path="/forgotPassword" element={<Unguarded><ForgotPassword /></Unguarded>} />
+					<Route path="/resetPassword/:token" element={<Unguarded><ResetPassword /></Unguarded>} />
 					<Route path="/profile" element={<AuthGuarded><Profile /></AuthGuarded>} />
 				</Routes>
 			</BrowserRouter>

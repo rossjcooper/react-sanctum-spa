@@ -17,3 +17,7 @@
 .button-primary {
 	@apply bg-primary text-white;
 }
+
+.link {
+	@apply underline inline-block;
+}

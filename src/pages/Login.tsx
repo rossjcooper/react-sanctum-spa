@@ -5,7 +5,7 @@ import Error from "../components/Error";
 import logo from "../img/logo.png";
 import { attemptLogin } from "../services/auth";
 import AuthContext from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const rules = yup.object({
 	email: yup.string().label('Email').email().required(),
@@ -56,7 +56,7 @@ const Login = () => {
 				<div className="w-full text-center p-4">
 					<img src={logo} alt="Logo" className="w-32 inline" />
 				</div>
-				<Formik validationSchema={rules} initialValues={initialValues} onSubmit={onSubmit}>
+				<Formik validationSchema={rules} initialValues={initialValues} onSubmit={onSubmit} className="mb-4">
 					{({errors, isValid, touched}) => {
 						const allErrors = {...errors, ...apiErrors};
 						return (
@@ -76,6 +76,9 @@ const Login = () => {
 						</Form>
 					)}}
 				</Formik>
+				<div className="mt-4">
+					<Link to="/forgotPassword" className="link">Forgot Password</Link>
+				</div>
 			</div>
 		</div>
 	);
