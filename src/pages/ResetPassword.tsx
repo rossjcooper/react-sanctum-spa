@@ -71,14 +71,17 @@ const ResetPassword = () => {
 							return (
 								<Form className="text-left">
 									<div className="mb-4">
+										<label htmlFor="email" className="form-label block">Email:</label>
 										<Field name="email" className="input-control block w-full" placeholder="you@example.com" />
 										<Error error={allErrors.email} />
 									</div>
 									<div className="mb-4">
+										<label htmlFor="password" className="form-label block">New Password:</label>
 										<Field name="password" type="password" autocomplete="new-password" className="input-control block w-full" placeholder="*********" />
 										<Error error={allErrors.password} />
 									</div>
 									<div className="mb-4">
+										<label htmlFor="confirmPassword" className="form-label block">Confirm Password:</label>
 										<Field name="confirmPassword" type="password" autocomplete="new-password" className="input-control block w-full" placeholder="*********" />
 										<Error error={allErrors.confirmPassword} />
 									</div>
