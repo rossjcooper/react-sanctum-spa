@@ -3,6 +3,7 @@ import { useState } from 'react';
 import * as yup from 'yup';
 import Error from './Error';
 import { changePassword, ChangePasswordData } from '../services/auth';
+import { errorToast, successToast } from '../utils/toast';
 
 const rules = yup.object({
     currentPassword: yup.string().label('Current password').required().min(8)
@@ -27,13 +28,14 @@ export const ChangePasswordForm = () => {
         setApiErrors({});
         setSaving(true);
         changePassword(values).then(() => {
-
+            successToast('Password changed successfully');
         }).catch((err) => {
             if (err.response && err.response.data.errors) {
                 setApiErrors(err.response.data.errors);
             } else {
                 console.error(err);
             }
+            errorToast('Failed to change password, check for errors');
         }).finally(() => {
             setSaving(false);
         });

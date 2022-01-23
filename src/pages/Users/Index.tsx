@@ -5,6 +5,7 @@ import { fetchUsers, User } from '../../services/users';
 import PerPageSelector from '../../components/PerPageSelector';
 import SortBy, { SortByDirections, SortByValue } from '../../components/SortBy';
 import Pagination from '../../components/Pagination';
+import { errorToast } from '../../utils/toast';
 
 export const Index = () => {
     const [keyword, setKeyword] = useState('');
@@ -28,6 +29,9 @@ export const Index = () => {
             setUsers(data.data);
             setLastPage(data.last_page);
             setLoading(false);
+        }).catch((err) => {
+            errorToast('Something went wrong fetching users, try again');
+            console.error(err);
         });
     }, [keyword, perPage, sortBy, page]);
 

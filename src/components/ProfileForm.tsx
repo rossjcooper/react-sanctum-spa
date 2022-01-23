@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import Error from './Error';
 import AuthContext from '../contexts/AuthContext';
 import { AuthUser, fetchProfile, updateProfile } from '../services/auth';
+import { errorToast, successToast } from '../utils/toast';
 
 const rules = yup.object({
     name: yup.string().label('Name').required().max(100),
@@ -27,12 +28,14 @@ export const ProfileForm = () => {
         updateProfile(values).then((res) => {
             setAuthUser(res.data.user);
             setUser(res.data.user);
+            successToast('Profile updated successfully');
         }).catch((err) => {
             if (err.response && err.response.data.errors) {
                 setApiErrors(err.response.data.errors);
             } else {
                 console.error(err);
             }
+            errorToast('Failed to save profile, check for errors');
         }).finally(() => {
             setSaving(false);
         });

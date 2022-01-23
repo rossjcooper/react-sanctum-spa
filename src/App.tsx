@@ -1,6 +1,7 @@
 import {
     ReactNode, useEffect, useMemo, useState,
 } from 'react';
+import { ToastContainer } from 'react-toastify';
 import './App.css';
 import { AuthUser, fetchCsrfCookie, fetchProfile } from './services/auth';
 import AuthContext from './contexts/AuthContext';
@@ -35,6 +36,7 @@ function App(props: AppProps) {
             <AuthContext.Provider value={value}>
                 {props.children}
             </AuthContext.Provider>
+            <ToastContainer hideProgressBar />
         </div>
     );
 }
