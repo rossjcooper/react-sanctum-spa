@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate, useParams } from 'react-router-dom';
 import { errorToast, successToast } from '../../utils/toast';
-import { fetchUser, saveUser, User } from '../../services/users';
+import {
+    deleteUser, fetchUser, saveUser, User,
+} from '../../services/users';
 import AppLayout from '../../layouts/AppLayout';
 import Error from '../../components/Error';
+import Modal from '../../components/Modal';
+import AuthContext from '../../contexts/AuthContext';
 
 const rules = yup.object({
     name: yup.string().label('Name').required().max(100),
     email: yup.string().label('Email').required().email(),
+    password: yup.string().label('Password').nullable().min(8).max(32),
 });
 
 interface UserForm {
@@ -29,11 +34,14 @@ const initialUser: UserForm = {
 export const Edit = () => {
     const [user, setUser] = useState<UserForm>();
     const [apiErrors, setApiErrors] = useState<any>({});
-    const [saving, setSaving] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [saving, setSaving] = useState(false);
+    const [deleting, setDeleting] = useState(false);
     const params = useParams();
     const navigate = useNavigate();
+    const { user: authUser } = useContext(AuthContext);
     const id = params.id || null;
 
     useEffect(() => {
@@ -72,6 +80,20 @@ export const Edit = () => {
         });
     };
 
+    const submitDelete = () => {
+        setDeleting(true);
+        deleteUser(id).then(() => {
+            successToast('User deleted successfully');
+            navigate('/users');
+        }).catch((err) => {
+            console.error(err);
+            errorToast('Failed to delete user');
+        }).finally(() => {
+            setDeleting(false);
+            setShowDelete(false);
+        });
+    };
+
     if (!user) {
         return null;
     }
@@ -86,11 +108,12 @@ export const Edit = () => {
         <AppLayout header={<div>{`${id ? 'Edit' : 'New'} User`}</div>}>
             <Formik initialValues={{ ...user }} onSubmit={handleSubmit} validationSchema={rules}>
                 {({
-                    errors, touched, isValid, setFieldValue, values,
+                    errors, touched, isValid, setFieldValue, values, setFieldTouched,
                 }) => {
                     const allErrors = { ...errors, ...apiErrors };
                     const generatePassword = () => {
                         setFieldValue('password', Math.random().toString(36).slice(2));
+                        setFieldTouched('password', true);
                         setShowPassword(true);
                         setFieldValue('emailPassword', true);
                     };
@@ -112,6 +135,8 @@ export const Edit = () => {
                                     <div className="mb-4">
                                         <label htmlFor="password" className="form-label block">Password:</label>
                                         <Field name="password" type={showPassword ? 'text' : 'password'} id="password" className="input-control w-full" autoComplete="new-password" />
+                                        <Error error={allErrors.password} />
+                                        <button type="button" className="button button-secondary mt-4" onClick={generatePassword}>Generate New Password</button>
                                         <div className="my-2">
                                             <label htmlFor="showPassword" className={values.password ? '' : 'opacity-50'}>
                                                 <input disabled={values.password === ''} type="checkbox" id="showPassword" checked={showPassword} onChange={(e) => setShowPassword(e.target.checked)} />
@@ -124,11 +149,10 @@ export const Edit = () => {
                                                 <span className="ml-1">Send Password via Email</span>
                                             </label>
                                         </div>
-                                        <button type="button" className="button button-secondary button-sm mt-2" onClick={generatePassword}>Generate New Password</button>
-                                        <Error error={allErrors.password} />
                                     </div>
-                                    <div className="flex">
-                                        <button type="submit" className="ml-auto button button-primary" disabled={saving || !touched || !isValid}>{saving ? 'Saving...' : 'Save'}</button>
+                                    <div className="flex justify-end">
+                                        {id ? (<button type="button" disabled={saving || deleting || authUser?.id === parseInt(id, 10)} className="button button-danger mr-2" onClick={() => setShowDelete(true)}>Delete</button>) : null}
+                                        <button type="submit" className="button button-primary" disabled={saving || !touched || !isValid || deleting}>{saving ? 'Saving...' : 'Save'}</button>
                                     </div>
                                 </div>
                             </div>
@@ -136,6 +160,19 @@ export const Edit = () => {
                     );
                 }}
             </Formik>
+            {showDelete ? (
+                <Modal title="Delete User" onClose={() => setShowDelete(false)}>
+                    <p>
+                        Are you sure you want to delete user
+                        <span className="font-semibold ml-1">{user.name}</span>
+                        ?
+                    </p>
+                    <div className="flex justify-end mt-4">
+                        <button type="button" disabled={deleting} className="button button-primary mr-2" onClick={() => submitDelete()}>Yes</button>
+                        <button type="button" disabled={deleting} className="button" onClick={() => setShowDelete(false)}>No</button>
+                    </div>
+                </Modal>
+            ) : null}
         </AppLayout>
     );
 };

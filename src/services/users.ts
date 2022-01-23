@@ -24,7 +24,7 @@ interface FetchUsersResponse {
 
 export const fetchUsers = (params: FetchUsersParams) => API.get<FetchUsersResponse>('/users', { params });
 
-export const fetchUser = (id: number) => API.get<User>(`/users/${id}`);
+export const fetchUser = (id: any) => API.get<User>(`/users/${id}`);
 
 export const saveUser = (user: User) => {
     if (user.id) {
@@ -32,3 +32,5 @@ export const saveUser = (user: User) => {
     }
     return API.post<User>('/users', user);
 };
+
+export const deleteUser = (id: any) => API.delete(`/users/${id}`);

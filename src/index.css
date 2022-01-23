@@ -31,6 +31,10 @@ body {
     @apply bg-secondary text-white;
 }
 
+.button-danger {
+    @apply bg-none text-red-500;
+}
+
 .link {
     @apply underline inline-block;
 }
