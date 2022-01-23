@@ -18,9 +18,9 @@ export const Pagination = (props: PaginationProps) => {
 
     return (
         <div className="my-4">
-            <select name="page" value={props.page} className="input-control" onChange={handleOnChange}>
+            <select name="page" value={props.page} className="input-control" disabled={props.lastPage === 1} onChange={handleOnChange}>
                 {options.map((o) => (
-                    <option value={o}>
+                    <option key={`pagination_${o}`} value={o}>
                         { `Page ${o}` }
                     </option>
                 ))}
