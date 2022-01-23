@@ -21,8 +21,7 @@ export const Pagination = (props: PaginationProps) => {
             <select name="page" value={props.page} className="input-control" onChange={handleOnChange}>
                 {options.map((o) => (
                     <option value={o}>
-                        Page
-                        {o}
+                        { `Page ${o}` }
                     </option>
                 ))}
             </select>
