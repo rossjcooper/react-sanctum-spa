@@ -3,22 +3,21 @@ export interface ErrorProps {
 }
 
 const Error = (props: ErrorProps) => {
+    if (!props.error) {
+        return null;
+    }
 
-	if (!props.error) {
-		return null;
-	}
+    let error = '';
+    if (typeof props.error === 'string') {
+        error = props.error;
+    }
+    if (props.error instanceof Array) {
+        error = props.error[0];
+    }
 
-	let error = '';
-	if (typeof props.error === 'string') {
-		error = props.error;
-	}
-	if (props.error instanceof Array) {
-		error = props.error[0];
-	}
-
-	return (
-		<span className="text-red-500 block px-1 py-2 font-light text-xs">{error}</span>
-	);
-}
+    return (
+        <span className="text-red-500 block px-1 py-2 font-light text-xs">{error}</span>
+    );
+};
 
 export default Error;

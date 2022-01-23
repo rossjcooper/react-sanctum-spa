@@ -1,50 +1,35 @@
-import { AxiosPromise, AxiosResponse } from "axios";
-import API from "./api";
+import API from './api';
 
-export const fetchCsrfCookie = () => {
-	return API.get('/sanctum/csrf-cookie');
-}
+export const fetchCsrfCookie = () => API.get('/sanctum/csrf-cookie');
 
 export interface AuthUser {
-	id: number,
-	name: string,
-	email: string,
+    id: number,
+    name: string,
+    email: string,
 }
 
 export interface ChangePasswordData {
-	currentPassword: string,
-	newPassword: string,
-	confirmPassword: string,
+    currentPassword: string,
+    newPassword: string,
+    confirmPassword: string,
 }
 
 interface LoginResponse {
-	user: AuthUser,
+    user: AuthUser,
 }
 
-export const attemptLogin = (email: string, password: string) => {
-	return API.post<LoginResponse>('/login', {email, password});
-}
+export const attemptLogin = (email: string, password: string) => API.post<LoginResponse>('/login', { email, password });
 
-export const attemptLogout = () => {
-	return API.post('/logout');
-}
+export const attemptLogout = () => API.post('/logout');
 
-export const fetchProfile = () => {
-	return API.get<LoginResponse>('/profile');
-}
+export const fetchProfile = () => API.get<LoginResponse>('/profile');
 
-export const updateProfile = (user: AuthUser) => {
-	return API.post<LoginResponse>('/profile', user);
-}
+export const updateProfile = (user: AuthUser) => API.post<LoginResponse>('/profile', user);
 
-export const changePassword = (data: ChangePasswordData) => {
-	return API.post('/changePassword', data);
-}
+export const changePassword = (data: ChangePasswordData) => API.post('/changePassword', data);
 
-export const forgotPassword = (email: string) => {
-	return API.post('/forgotPassword', {email});
-}
+export const forgotPassword = (email: string) => API.post('/forgotPassword', { email });
 
-export const resetPassword = (email: string, password: string, confirmPassword: string, token: string) => {
-	return API.post('/resetPassword', {email, password, confirmPassword, token});
-}
+export const resetPassword = (email: string, password: string, confirmPassword: string, token: string) => API.post('/resetPassword', {
+    email, password, confirmPassword, token,
+});

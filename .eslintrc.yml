@@ -1,0 +1,33 @@
+env:
+  browser: true
+  es2021: true
+extends:
+  - plugin:react/recommended
+  - airbnb
+  - plugin:import/react
+  - plugin:react/jsx-runtime
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: latest
+  sourceType: module
+plugins:
+  - react
+  - '@typescript-eslint'
+rules: {
+  "indent": ["error", 4],
+  "react/function-component-definition": "off",
+  "react/jsx-indent": ["error", 4],
+  "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
+  "import/extensions": ["error", "never"],
+  "no-unused-vars": "off",
+  "@typescript-eslint/no-unused-vars": ["error"]
+}
+settings: {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+}

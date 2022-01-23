@@ -1,7 +1,8 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import './App.css';
-import { AuthUser, fetchCsrfCookie, fetchProfile } from "./services/auth";
-import AuthContext from "./contexts/AuthContext";
+import { AuthUser, fetchCsrfCookie, fetchProfile } from './services/auth';
+import AuthContext from './contexts/AuthContext';
+
 interface AppProps {
     children?: ReactNode,
 }
@@ -12,12 +13,12 @@ function App(props: AppProps) {
 
     useEffect(() => {
         fetchCsrfCookie().then(() => {
-            fetchProfile().then(res => {
+            fetchProfile().then((res) => {
                 setUser(res.data.user);
                 setReady(true);
             }).catch(() => {
                 setReady(true);
-            })
+            });
         });
     }, []);
 
