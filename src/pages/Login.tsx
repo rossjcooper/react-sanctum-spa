@@ -73,7 +73,7 @@ const Login = () => {
                                 </div>
                                 <Error error={error} />
                                 <div>
-                                    <button type="button" disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Login'}</button>
+                                    <button type="submit" disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Login'}</button>
                                 </div>
                             </Form>
                         );
