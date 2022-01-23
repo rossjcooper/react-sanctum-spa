@@ -47,7 +47,10 @@ export const Index = () => {
                         <input type="search" value={keyword} onChange={(e) => { setKeyword(e.target.value); }} className="input-control" placeholder="Search..." />
                     </div>
                     <div>
-                        <button type="button" disabled={loading} className="button button-primary">Search</button>
+                        <button type="button" disabled={loading} className="button button-primary m-1">Search</button>
+                    </div>
+                    <div className="ml-auto">
+                        <Link className="button button-secondary m-1" to="/users/new">Add User</Link>
                     </div>
                 </form>
             </div>

@@ -12,6 +12,7 @@ import Unguarded from './components/Unguarded';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import UsersIndex from './pages/Users/Index';
+import UsersEdit from './pages/Users/Edit';
 
 ReactDOM.render(
     <StrictMode>
@@ -24,6 +25,8 @@ ReactDOM.render(
                     <Route path="/resetPassword/:token" element={<Unguarded><ResetPassword /></Unguarded>} />
                     <Route path="/profile" element={<AuthGuarded><Profile /></AuthGuarded>} />
                     <Route path="/users" element={<AuthGuarded><UsersIndex /></AuthGuarded>} />
+                    <Route path="/users/new" element={<AuthGuarded><UsersEdit /></AuthGuarded>} />
+                    <Route path="/users/:id" element={<AuthGuarded><UsersEdit /></AuthGuarded>} />
                 </Routes>
             </BrowserRouter>
         </App>

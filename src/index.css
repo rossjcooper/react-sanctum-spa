@@ -16,11 +16,19 @@ body {
 }
 
 .button {
-    @apply py-2 text-sm px-6 rounded font-semibold disabled:bg-gray-200 disabled:text-slate-600 transition-colors;
+    @apply py-2 text-sm px-6 rounded font-semibold disabled:bg-gray-200 disabled:text-slate-600 transition-colors inline-block;
+}
+
+.button-sm {
+    @apply text-xs py-1 px-2;
 }
 
 .button-primary {
     @apply bg-primary text-white;
+}
+
+.button-secondary {
+    @apply bg-secondary text-white;
 }
 
 .link {
