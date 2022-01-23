@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
 
 interface PaginationProps {
-	page: number,
-	lastPage: number,
-	onChange: (page: number) => any,
+    page: number,
+    lastPage: number,
+    onChange: (page: number) => any,
 }
 
 export const Pagination = (props: PaginationProps) => {
@@ -13,7 +13,7 @@ export const Pagination = (props: PaginationProps) => {
     }
 
     const handleOnChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        props.onChange(parseInt(event.target.value));
+        props.onChange(parseInt(event.target.value, 10));
     };
 
     return (

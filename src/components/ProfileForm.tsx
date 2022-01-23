@@ -38,36 +38,36 @@ export const ProfileForm = () => {
         });
     };
 
+    if (!user) {
+        return null;
+    }
+
     return (
-        <>
-            {user ? (
-                <Formik initialValues={{ ...user }} onSubmit={handleSubmit} validationSchema={rules}>
-                    {({ errors, touched, isValid }) => {
-                        const allErrors = { ...errors, ...apiErrors };
-                        return (
-                            <Form>
-                                <div>
-                                    <h2 className="text-xl mb-6 text-slate-500">Profile Settings</h2>
-                                    <div className="mb-4">
-                                        <label htmlFor="name" className="form-label block">Name:</label>
-                                        <Field name="name" id="name" className="input-control w-full" />
-                                        <Error error={allErrors.name} />
-                                    </div>
-                                    <div className="mb-4">
-                                        <label htmlFor="email" className="form-label block">Email:</label>
-                                        <Field name="email" type="email" id="email" className="input-control w-full" />
-                                        <Error error={allErrors.email} />
-                                    </div>
-                                    <div className="flex">
-                                        <button className="ml-auto button button-primary" disabled={saving || !touched || !isValid}>{saving ? 'Saving...' : 'Save'}</button>
-                                    </div>
-                                </div>
-                            </Form>
-                        );
-                    }}
-                </Formik>
-            ) : null}
-        </>
+        <Formik initialValues={{ ...user }} onSubmit={handleSubmit} validationSchema={rules}>
+            {({ errors, touched, isValid }) => {
+                const allErrors = { ...errors, ...apiErrors };
+                return (
+                    <Form>
+                        <div>
+                            <h2 className="text-xl mb-6 text-slate-500">Profile Settings</h2>
+                            <div className="mb-4">
+                                <label htmlFor="name" className="form-label block">Name:</label>
+                                <Field name="name" id="name" className="input-control w-full" />
+                                <Error error={allErrors.name} />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="email" className="form-label block">Email:</label>
+                                <Field name="email" type="email" id="email" className="input-control w-full" />
+                                <Error error={allErrors.email} />
+                            </div>
+                            <div className="flex">
+                                <button type="submit" className="ml-auto button button-primary" disabled={saving || !touched || !isValid}>{saving ? 'Saving...' : 'Save'}</button>
+                            </div>
+                        </div>
+                    </Form>
+                );
+            }}
+        </Formik>
     );
 };
 

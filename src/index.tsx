@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -14,7 +14,7 @@ import ResetPassword from './pages/ResetPassword';
 import UsersIndex from './pages/Users/Index';
 
 ReactDOM.render(
-    <React.StrictMode>
+    <StrictMode>
         <App>
             <BrowserRouter>
                 <Routes>
@@ -27,7 +27,7 @@ ReactDOM.render(
                 </Routes>
             </BrowserRouter>
         </App>
-    </React.StrictMode>,
+    </StrictMode>,
     document.getElementById('root'),
 );
 

@@ -3,53 +3,53 @@
 @tailwind utilities;
 
 body {
-	@apply text-slate-700;
+    @apply text-slate-700;
 }
 
 .input-control {
-	@apply rounded-sm p-2 border-b-2 border-gray-200 bg-white;
+    @apply rounded-sm p-2 border-b-2 border-gray-200 bg-white;
 }
 
 .form-label {
-	@apply mb-1 text-slate-600 text-sm font-light;
+    @apply mb-1 text-slate-600 text-sm font-light;
 }
 
 .button {
-	@apply py-2 text-sm px-6 rounded font-semibold disabled:bg-gray-200 disabled:text-slate-600 transition-colors;
+    @apply py-2 text-sm px-6 rounded font-semibold disabled:bg-gray-200 disabled:text-slate-600 transition-colors;
 }
 
 .button-primary {
-	@apply bg-primary text-white;
+    @apply bg-primary text-white;
 }
 
 .link {
-	@apply underline inline-block;
+    @apply underline inline-block;
 }
 
 .data-table {
-	@apply table-auto bg-white w-full;
+    @apply table-auto bg-white w-full;
 }
 
 .data-table thead {
-	@apply bg-slate-50 text-slate-400 font-medium;
+    @apply bg-slate-50 text-slate-400 font-medium;
 }
 
 .data-table th {
-	@apply p-4 pt-6 font-light;
+    @apply p-4 pt-6 font-light;
 }
 
 .data-table td {
-	@apply p-4 border-b border-slate-100 text-slate-600;
+    @apply p-4 border-b border-slate-100 text-slate-600;
 }
 
 .sort-by * {
-	@apply transition-all;
+    @apply transition-all;
 }
 
 .sort-by .direction {
-	@apply inline-block ml-1 opacity-0;
+    @apply inline-block ml-1 opacity-0;
 }
 
 .sort-by:hover .direction{
-	@apply opacity-100;
+    @apply opacity-100;
 }

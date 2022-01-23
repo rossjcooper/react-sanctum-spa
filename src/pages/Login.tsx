@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import * as yup from 'yup';
 import { Field, Formik, Form } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,8 +13,8 @@ const rules = yup.object({
 });
 
 interface FormValues {
-	email: string,
-	password: string,
+    email: string,
+    password: string,
 }
 
 const initialValues: FormValues = {
@@ -57,7 +57,7 @@ const Login = () => {
                     <img src={logo} alt="Logo" className="w-32 inline" />
                 </div>
                 <Formik validationSchema={rules} initialValues={initialValues} onSubmit={onSubmit} className="mb-4">
-                    {({ errors, isValid, touched }) => {
+                    {({ errors, isValid }) => {
                         const allErrors = { ...errors, ...apiErrors };
                         return (
                             <Form className="text-left">
@@ -73,7 +73,7 @@ const Login = () => {
                                 </div>
                                 <Error error={error} />
                                 <div>
-                                    <button disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Login'}</button>
+                                    <button type="button" disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Login'}</button>
                                 </div>
                             </Form>
                         );

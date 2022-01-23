@@ -1,11 +1,10 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import * as yup from 'yup';
 import { Field, Formik, Form } from 'formik';
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Error from '../components/Error';
 import logo from '../img/logo.png';
 import { resetPassword } from '../services/auth';
-import AuthContext from '../contexts/AuthContext';
 
 const rules = yup.object({
     email: yup.string().label('Email').email().required(),
@@ -14,9 +13,9 @@ const rules = yup.object({
 });
 
 interface FormValues {
-	email: string,
-	password: string,
-	confirmPassword: string,
+    email: string,
+    password: string,
+    confirmPassword: string,
 }
 
 const initialValues: FormValues = {
@@ -37,7 +36,7 @@ const ResetPassword = () => {
         setLoading(true);
         setError(undefined);
         setApiErrors({});
-        resetPassword(values.email, values.password, values.confirmPassword, token).then((res) => {
+        resetPassword(values.email, values.password, values.confirmPassword, token).then(() => {
             setSubmitted(true);
         }).catch((err) => {
             setLoading(false);
@@ -66,13 +65,13 @@ const ResetPassword = () => {
                 </div>
                 {!submitted ? (
                     <Formik validationSchema={rules} initialValues={initialValues} onSubmit={onSubmit}>
-                        {({ errors, isValid, touched }) => {
+                        {({ errors, isValid }) => {
                             const allErrors = { ...errors, ...apiErrors };
                             return (
                                 <Form className="text-left">
                                     <div className="mb-4">
                                         <label htmlFor="email" className="form-label block">Email:</label>
-                                        <Field name="email" className="input-control block w-full" placeholder="you@example.com" />
+                                        <Field name="email" id="email" className="input-control block w-full" placeholder="you@example.com" />
                                         <Error error={allErrors.email} />
                                     </div>
                                     <div className="mb-4">
@@ -88,7 +87,7 @@ const ResetPassword = () => {
                                     <Error error={allErrors.token} />
                                     <Error error={error} />
                                     <div>
-                                        <button disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Reset Password'}</button>
+                                        <button type="submit" disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Reset Password'}</button>
                                     </div>
                                     <div className="text-center mt-4">
                                         <Link to="/login" className="link">Back to Login</Link>

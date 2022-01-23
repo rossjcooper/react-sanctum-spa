@@ -33,7 +33,7 @@ export const Index = () => {
 
     useEffect(() => {
         submitSearch();
-    }, [perPage, sortBy, page]);
+    }, [perPage, sortBy, page, submitSearch]);
 
     return (
         <AppLayout header={<div>Users</div>}>

@@ -1,4 +1,6 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import {
+    ReactNode, useEffect, useMemo, useState,
+} from 'react';
 import './App.css';
 import { AuthUser, fetchCsrfCookie, fetchProfile } from './services/auth';
 import AuthContext from './contexts/AuthContext';
@@ -22,12 +24,15 @@ function App(props: AppProps) {
         });
     }, []);
 
+    const value = useMemo(() => ({ user, setUser }), [user, setUser]);
+
     if (!ready) {
         return null;
     }
+
     return (
         <div className="App">
-            <AuthContext.Provider value={{ user, setUser }}>
+            <AuthContext.Provider value={value}>
                 {props.children}
             </AuthContext.Provider>
         </div>

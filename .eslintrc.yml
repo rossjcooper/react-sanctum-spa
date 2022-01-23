@@ -22,7 +22,14 @@ rules: {
   "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx", ".ts"] }],
   "import/extensions": ["error", "never"],
   "no-unused-vars": "off",
-  "@typescript-eslint/no-unused-vars": ["error"]
+  "@typescript-eslint/no-unused-vars": ["error"],
+  "max-len": ["warn"],
+  "react/destructuring-assignment": ["off"],
+  "react/require-default-props": ["off"],
+  "jsx-a11y/label-has-associated-control": ["off"],
+  "no-shadow": "off",
+  "@typescript-eslint/no-shadow": ["error"],
+  "no-plusplus": "off",
 }
 settings: {
     "import/resolver": {

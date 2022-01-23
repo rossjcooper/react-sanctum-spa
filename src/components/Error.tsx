@@ -1,5 +1,5 @@
 export interface ErrorProps {
-	error: string|undefined|string[],
+    error: string|undefined|string[],
 }
 
 const Error = (props: ErrorProps) => {
@@ -12,7 +12,7 @@ const Error = (props: ErrorProps) => {
         error = props.error;
     }
     if (props.error instanceof Array) {
-        error = props.error[0];
+        [error] = props.error;
     }
 
     return (

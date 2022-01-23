@@ -1,18 +1,17 @@
-import { useContext, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import * as yup from 'yup';
 import { Field, Formik, Form } from 'formik';
-import { useNavigate, Link } from 'react-router-dom';
 import Error from '../components/Error';
 import logo from '../img/logo.png';
 import { forgotPassword } from '../services/auth';
-import AuthContext from '../contexts/AuthContext';
 
 const rules = yup.object({
     email: yup.string().label('Email').email().required(),
 });
 
 interface FormValues {
-	email: string,
+    email: string,
 }
 
 const initialValues: FormValues = {
@@ -23,15 +22,13 @@ const ForgotPassword = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | undefined>();
     const [apiErrors, setApiErrors] = useState({});
-    const { setUser } = useContext(AuthContext);
-    const navigate = useNavigate();
     const [sent, setSent] = useState(false);
 
     const onSubmit = (values: FormValues) => {
         setLoading(true);
         setError(undefined);
         setApiErrors({});
-        forgotPassword(values.email).then((res) => {
+        forgotPassword(values.email).then(() => {
             setSent(true);
         }).catch((err) => {
             setLoading(false);
@@ -51,7 +48,7 @@ const ForgotPassword = () => {
                     <img src={logo} alt="Logo" className="w-32 inline" />
                     {sent ? (
                         <>
-                            <p className="mb-4 text-gray-700">If we recognise your email we have sent you an email with a link to reset your password. Don't forget to check your Spam folder.</p>
+                            <p className="mb-4 text-gray-700">If we recognise your email we have sent you an email with a link to reset your password. Don&apos;t forget to check your Spam folder.</p>
                             <Link to="/login" className="button button-primary">Back to Login</Link>
                         </>
                     ) : (
@@ -60,7 +57,7 @@ const ForgotPassword = () => {
                 </div>
                 {!sent ? (
                     <Formik validationSchema={rules} initialValues={initialValues} onSubmit={onSubmit}>
-                        {({ errors, isValid, touched }) => {
+                        {({ errors, isValid }) => {
                             const allErrors = { ...errors, ...apiErrors };
                             return (
                                 <Form className="text-left">
@@ -70,7 +67,7 @@ const ForgotPassword = () => {
                                     </div>
                                     <Error error={error} />
                                     <div>
-                                        <button disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Get Link'}</button>
+                                        <button type="submit" disabled={!isValid || loading} className="button button-primary block w-full">{loading ? 'Please wait...' : 'Get Link'}</button>
                                     </div>
                                     <div className="text-center mt-4">
                                         <Link to="/login" className="link">Back to Login</Link>

@@ -26,7 +26,7 @@ export const ChangePasswordForm = () => {
     const handleSubmit = (values: ChangePasswordData) => {
         setApiErrors({});
         setSaving(true);
-        changePassword(values).then((res) => {
+        changePassword(values).then(() => {
 
         }).catch((err) => {
             if (err.response && err.response.data.errors) {
@@ -63,7 +63,7 @@ export const ChangePasswordForm = () => {
                                 <Error error={allErrors.confirmPassword} />
                             </div>
                             <div className="flex">
-                                <button className="ml-auto button button-primary" disabled={saving || !touched || !isValid}>{saving ? 'Saving...' : 'Change Password'}</button>
+                                <button type="submit" className="ml-auto button button-primary" disabled={saving || !touched || !isValid}>{saving ? 'Saving...' : 'Change Password'}</button>
                             </div>
                         </div>
                     </Form>

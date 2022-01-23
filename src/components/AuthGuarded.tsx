@@ -1,5 +1,5 @@
 import {
-    ReactNode, useContext, useEffect, Children,
+    ReactNode, useContext, useEffect,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
@@ -16,7 +16,7 @@ export const AuthGuarded = (props: AuthGuardedProps) => {
         if (!user) {
             navigate('/login');
         }
-    }, [user]);
+    }, [user, navigate]);
 
     if (!user) {
         return null;

@@ -5,8 +5,8 @@ import LogoutButton from './LogoutButton';
 import logo from '../img/logo.png';
 
 interface SideBarLinkProps {
-	to: To,
-	children: ReactNode,
+    to: To,
+    children: ReactNode,
 }
 
 const SideBarLink = (props: SideBarLinkProps) => (

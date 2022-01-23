@@ -1,27 +1,30 @@
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 
 export enum SortByDirections {
-	ASC = 'asc',
-	DESC = 'desc',
+    ASC = 'asc',
+    DESC = 'desc',
 }
 
 export interface SortByValue {
-	name: string,
-	direction: SortByDirections,
+    name: string,
+    direction: SortByDirections,
 }
 
 interface SortByProps {
-	name: string,
-	label: string,
-	value: SortByValue,
-	onChange: (value: SortByValue) => any,
+    name: string,
+    label: string,
+    value: SortByValue,
+    onChange: (value: SortByValue) => any,
 }
 
 const SortBy = (props: SortByProps) => {
     const isCurrent = props.name === props.value.name;
 
     const handleOnClick = () => {
-        const direction = isCurrent ? props.value.direction === SortByDirections.ASC ? SortByDirections.DESC : SortByDirections.ASC : SortByDirections.ASC;
+        let direction = props.value.direction === SortByDirections.ASC ? SortByDirections.DESC : SortByDirections.ASC;
+        if (isCurrent) {
+            direction = SortByDirections.ASC;
+        }
 
         props.onChange({
             name: props.name,

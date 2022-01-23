@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
 
 interface PerPageSelectorProps {
-	perPage: number,
-	onChange: (perPage: number) => any,
-	options?: number[],
+    perPage: number,
+    onChange: (perPage: number) => any,
+    options?: number[],
 }
 
 const defaultOptions = [
@@ -16,7 +16,7 @@ export const PerPageSelector = (props: PerPageSelectorProps) => {
     const options = props.options || defaultOptions;
 
     const handleOnChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        props.onChange(parseInt(event.target.value));
+        props.onChange(parseInt(event.target.value, 10));
     };
 
     return (

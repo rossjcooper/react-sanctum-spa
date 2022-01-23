@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../contexts/AuthContext';
 
 interface UnguardedProps {
-	children: ReactNode,
+    children: ReactNode,
 }
 
 export const Unguarded = (props: UnguardedProps) => {
@@ -14,13 +14,13 @@ export const Unguarded = (props: UnguardedProps) => {
         if (user) {
             navigate('/');
         }
-    }, []);
+    }, [user, navigate]);
 
     if (user) {
         return null;
     }
 
-    return (<>{props.children}</>);
+    return (<div>{props.children}</div>);
 };
 
 export default Unguarded;
